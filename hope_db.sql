@@ -27,7 +27,7 @@ CREATE TABLE Outil(
    domaine VARCHAR(100),
    simpleDesc VARCHAR(500),
    detailledDesc VARCHAR(500),
-   lienURL VARCHAR(100),
+   lienURL VARCHAR(300),
    acces VARCHAR(350),
    PRIMARY KEY(titre)
 );
