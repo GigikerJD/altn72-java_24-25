@@ -4,6 +4,7 @@ use hope_db;
 
 CREATE TABLE Utilisateur(
    email VARCHAR(150),
+   pseudo VARCHAR(100),
    motDePasse VARCHAR(100),
    prenom VARCHAR(100),
    nom VARCHAR(100),
@@ -11,11 +12,11 @@ CREATE TABLE Utilisateur(
    isAdmin LOGICAL,
    isStudent LOGICAL,
    isTeacher LOGICAL,
-   PRIMARY KEY(email)
+   PRIMARY KEY(email, pseudo)
 );
 
 CREATE TABLE Feedback(
-   idFeedback INT,
+   idFeedback VARCHAR(100),
    textFeedback VARCHAR(50),
    dateFeedback DATETIME,
    PRIMARY KEY(idFeedback)
@@ -33,14 +34,15 @@ CREATE TABLE Outil(
 
 CREATE TABLE Consulte(
    email VARCHAR(150),
+   pseudo VARCHAR(100),
    titre VARCHAR(150),
-   PRIMARY KEY(email, titre),
-   FOREIGN KEY(email) REFERENCES Utilisateur(email),
+   PRIMARY KEY(email, pseudo, titre),
+   FOREIGN KEY(email, pseudo) REFERENCES Utilisateur(email, pseudo),
    FOREIGN KEY(titre) REFERENCES Outil(titre)
 );
 
 CREATE TABLE Enveloppe(
-   idFeedback INT,
+   idFeedback VARCHAR(100),
    titre VARCHAR(150),
    PRIMARY KEY(idFeedback, titre),
    FOREIGN KEY(idFeedback) REFERENCES Feedback(idFeedback),
