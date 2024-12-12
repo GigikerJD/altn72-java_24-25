@@ -9,9 +9,9 @@ CREATE TABLE Utilisateur(
    prenom VARCHAR(100),
    nom VARCHAR(100),
    DOB DATE,
-   isAdmin LOGICAL,
-   isStudent LOGICAL,
-   isTeacher LOGICAL,
+   isAdmin BOOLEAN,
+   isStudent BOOLEAN,
+   isTeacher BOOLEAN,
    PRIMARY KEY(email, pseudo)
 );
 
