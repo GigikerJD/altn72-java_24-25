@@ -23,12 +23,16 @@ import lombok.NoArgsConstructor;
 public class EnveloppeEntite implements Serializable {
     
     @Id
-    @ManyToOne
-    @JoinColumn(name = "idFeedback", referencedColumnName = "idFeedback")
-    private FeedbackEntite feedback;
+    private String idFeedback;
 
     @Id
+    private String titre;
+
     @ManyToOne
-    @JoinColumn(name = "titre", referencedColumnName = "titre")
+    @JoinColumn(name = "idFeedback", referencedColumnName = "idFeedback", insertable = false, updatable = false)
+    private FeedbackEntite feedback;
+
+    @ManyToOne
+    @JoinColumn(name = "titre", referencedColumnName = "titre", insertable = false, updatable = false)
     private OutilEntite outil;
 }

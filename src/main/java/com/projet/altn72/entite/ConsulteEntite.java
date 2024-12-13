@@ -24,15 +24,22 @@ import lombok.NoArgsConstructor;
 public class ConsulteEntite implements Serializable {
     
     @Id
+    private String email;
+
+    @Id
+    private String pseudo;
+
+    @Id
+    private String titre;
+
     @ManyToOne
     @JoinColumns({
-        @JoinColumn(name = "email", referencedColumnName = "email"),
-        @JoinColumn(name = "pseudo", referencedColumnName = "pseudo")
+        @JoinColumn(name = "email", referencedColumnName = "email", insertable = false, updatable = false),
+        @JoinColumn(name = "pseudo", referencedColumnName = "pseudo", insertable = false, updatable = false)
     })
     private UtilisateurEntite utilisateur;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "titre", referencedColumnName = "titre")
+    @JoinColumn(name = "titre", referencedColumnName = "titre", insertable = false, updatable = false)
     private OutilEntite outil;
 }
