@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.projet.altn72.entite.OutilEntite;
 import com.projet.altn72.modele.OutilRepository;
-import com.projet.altn72.modele.composite.Outil;
 
 @Service
 public class OutilService {
@@ -19,8 +18,11 @@ public class OutilService {
         return outilRepository.findAll();
     }
 
+    public String getDetailledDescFrom(String titre){
+        return outilRepository.findById(titre).get().getDetailledDesc();
+    }
+
     public OutilEntite getOutilParTitre(String titre){
-        Outil outil = new Outil();
-        return outilRepository.findById(outil).get();
+        return outilRepository.findById(titre).get();
     }
 }
