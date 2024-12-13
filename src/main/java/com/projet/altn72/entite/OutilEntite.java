@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Outil")
-public class OutilEntite {
+public class OutilEntite{
 
     @Id
-    @Column(name = "titre", length = 150)
+    @Column(name = "titre", length = 150, nullable = false)
     private String titre;
 
     @Column(name = "domaine", length = 100)
@@ -25,7 +25,7 @@ public class OutilEntite {
     @Column(name = "simpleDesc", length = 500)
     private String simpleDesc;
 
-    @Column(name = "detailledDesc", length = 1000)
+    @Column(name = "detailledDesc", length = 5000)
     private String detailledDesc;
 
     @Column(name = "lienURL", length = 1000)

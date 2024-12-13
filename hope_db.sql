@@ -25,9 +25,9 @@ CREATE TABLE Feedback(
 CREATE TABLE Outil(
    titre VARCHAR(150),
    domaine VARCHAR(100),
-   simpleDesc VARCHAR(500),
-   detailledDesc VARCHAR(1000),
-   lienURL VARCHAR(1000),
+   simple_desc VARCHAR(500),
+   detailled_desc VARCHAR(5000),
+   lienurl VARCHAR(1000),
    acces VARCHAR(350),
    PRIMARY KEY(titre)
 );

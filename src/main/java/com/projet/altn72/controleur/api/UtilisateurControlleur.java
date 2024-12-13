@@ -11,6 +11,7 @@ import com.projet.altn72.service.UtilisateurService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -28,9 +29,19 @@ public class UtilisateurControlleur {
         return users; 
     }
 
-    @PostMapping("/{email}")
+    @GetMapping("/{email}")
     public ResponseEntity<UtilisateurEntite> getUtilisateurParEmail(@PathVariable String email) {
         return ResponseEntity.ok(utilisateurService.getUtilisateurParEmail(email));
+    }
+
+    @GetMapping("/{pseudo}")
+    public ResponseEntity<UtilisateurEntite> getUtilisateurParPseudo(@PathVariable String pseudo){
+        return ResponseEntity.ok(utilisateurService.getUtilisateurParPseudo(pseudo));
+    }
+
+    @PostMapping("/create_user")
+    public void createNouvelUtilisateur(@RequestBody UtilisateurEntite utilisateurEntite){
+        utilisateurService.creerUtilisateur(utilisateurEntite);
     }
     
     

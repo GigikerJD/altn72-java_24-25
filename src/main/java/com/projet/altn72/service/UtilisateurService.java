@@ -22,5 +22,13 @@ public class UtilisateurService {
         return utilisateurRepository.findById(email).get();
     }
 
+    public void creerUtilisateur(UtilisateurEntite utilisateurEntite) {
+        UtilisateurEntite copy = utilisateurEntite;
+    }
+
+    public UtilisateurEntite getUtilisateurParPseudo(String pseudo) {
+        return utilisateurRepository.findById(pseudo).get();
+    }
+
     
 }
