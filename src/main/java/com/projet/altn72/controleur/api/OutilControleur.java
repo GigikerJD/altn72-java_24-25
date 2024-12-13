@@ -29,8 +29,10 @@ public class OutilControleur {
     @GetMapping("/{titre}/detailledDesc")
     public ResponseEntity<String> getDescriptionDetaille(@PathVariable String titre) {
         String result = outilService.getDetailledDescFrom(titre);
-        if(result.equals("")) return ResponseEntity.status(404).body("Description détaillé non présente...");
-        return ResponseEntity.ok(result);
+        if ("Description détaillée non présente...".equals(result)) {
+            return ResponseEntity.status(404).body(result);
+        }
+        return ResponseEntity.ok(result); 
     }
 
     

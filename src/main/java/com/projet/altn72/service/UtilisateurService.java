@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.projet.altn72.entite.UtilisateurEntite;
 import com.projet.altn72.modele.UtilisateurRepository;
-import com.projet.altn72.modele.composite.Utilisateur;
 
 @Service
 public class UtilisateurService {
@@ -20,8 +19,7 @@ public class UtilisateurService {
     }
 
     public UtilisateurEntite getUtilisateurParEmail(String email){
-        Utilisateur user = new Utilisateur(email);
-        return utilisateurRepository.findById(user).get();
+        return utilisateurRepository.findById(email).get();
     }
 
     
