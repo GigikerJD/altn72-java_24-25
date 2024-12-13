@@ -9,9 +9,9 @@ CREATE TABLE Utilisateur(
    prenom VARCHAR(100),
    nom VARCHAR(100),
    DOB DATE,
-   isAdmin LOGICAL,
-   isStudent LOGICAL,
-   isTeacher LOGICAL,
+   isAdmin BOOLEAN,
+   isStudent BOOLEAN,
+   isTeacher BOOLEAN,
    PRIMARY KEY(email, pseudo)
 );
 
@@ -26,8 +26,8 @@ CREATE TABLE Outil(
    titre VARCHAR(150),
    domaine VARCHAR(100),
    simpleDesc VARCHAR(500),
-   detailledDesc VARCHAR(500),
-   lienURL VARCHAR(100),
+   detailledDesc VARCHAR(1000),
+   lienURL VARCHAR(1000),
    acces VARCHAR(350),
    PRIMARY KEY(titre)
 );
