@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Détails de l'Outil</title>
+</head>
+<body>
+    <h1 th:text="${outil.titre}"></h1>
+    <p><strong>Domaine:</strong> <span th:text="${outil.domaine}"></span></p>
+    <p><strong>Description:</strong> <span th:text="${outil.simpleDesc}"></span></p>
+    <p><strong>Description détaillée:</strong> <span th:text="${outil.detailledDesc}"></span></p>
+    <p><strong>Lien:</strong> <a th:href="${outil.lienURL}" th:text="${outil.lienURL}"></a></p>
+    <p><strong>Accès:</strong> <span th:text="${outil.acces}"></span></p>
+    <a href="/outils">Retour à la liste</a>
+</body>
+</html>

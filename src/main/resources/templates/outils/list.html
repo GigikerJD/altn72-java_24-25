@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des Outils</title>
+</head>
+<body>
+    <h1>Liste des Outils</h1>
+    <ul>
+        <li th:each="outil : ${outils}">
+            <a th:href="@{/outils/{titre}(titre=${outil.titre})}" th:text="${outil.titre}"></a>
+        </li>
+    </ul>
+    <a href="/outils/new">Ajouter un outil</a>
+</body>
+</html>
