@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/users")
-public class UtilisateurControlleur {
+public class UtilisateurControleur {
 
     @Autowired
     private UtilisateurService utilisateurService;
@@ -28,21 +28,5 @@ public class UtilisateurControlleur {
         List<UtilisateurEntite> users = utilisateurService.getUtilisateurs();
         return users; 
     }
-
-    @GetMapping("/{email}")
-    public ResponseEntity<UtilisateurEntite> getUtilisateurParEmail(@PathVariable String email) {
-        return ResponseEntity.ok(utilisateurService.getUtilisateurParEmail(email));
-    }
-
-    @GetMapping("/{pseudo}")
-    public ResponseEntity<UtilisateurEntite> getUtilisateurParPseudo(@PathVariable String pseudo){
-        return ResponseEntity.ok(utilisateurService.getUtilisateurParPseudo(pseudo));
-    }
-
-    @PostMapping("/create_user")
-    public void createNouvelUtilisateur(@RequestBody UtilisateurEntite utilisateurEntite){
-        utilisateurService.creerUtilisateur(utilisateurEntite);
-    }
-    
     
 }
