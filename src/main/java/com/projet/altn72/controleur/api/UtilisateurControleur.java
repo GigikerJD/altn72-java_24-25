@@ -17,16 +17,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UtilisateurControleur {
 
     @Autowired
     private UtilisateurService utilisateurService;
 
     @GetMapping("")
-    public List<UtilisateurEntite> getTouslesUtilisateurs() {
+    public ResponseEntity<List<UtilisateurEntite>> getTouslesUtilisateurs() {
         List<UtilisateurEntite> users = utilisateurService.getUtilisateurs();
-        return users; 
+        return users.size() == 0 ?
+            ResponseEntity.status(404).body(null) :
+            ResponseEntity.ok(users);  
+    }
+
+    @GetMapping("/user/{email}")
+    public ResponseEntity<UtilisateurEntite>  getUtilisateurParEmail(@PathVariable String email){
+        UtilisateurEntite e = utilisateurService.getUtilisateurParEmail(email);
+        return e == null ?
+            ResponseEntity.status(404).body(null) :
+            ResponseEntity.ok(e);
+    }
+
+    
+    @PostMapping("/new_user")
+    public void createNouvelUtilisateur(@RequestBody UtilisateurEntite user){
+        utilisateurService.creerNouvelUtilisateur(user);
     }
     
 }

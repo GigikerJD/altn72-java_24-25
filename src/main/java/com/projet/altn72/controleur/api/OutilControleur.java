@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
-@RequestMapping("/outils")
+@RequestMapping("/api/outils")
 public class OutilControleur {
 
     @Autowired
