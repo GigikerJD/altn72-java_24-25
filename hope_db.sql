@@ -8,10 +8,8 @@ CREATE TABLE Utilisateur(
    motDePasse VARCHAR(100),
    prenom VARCHAR(100),
    nom VARCHAR(100),
+   statut VARCHAR(50)
    DOB DATE,
-   isAdmin BOOLEAN,
-   isStudent BOOLEAN,
-   isTeacher BOOLEAN,
    PRIMARY KEY(email, pseudo)
 );
 
