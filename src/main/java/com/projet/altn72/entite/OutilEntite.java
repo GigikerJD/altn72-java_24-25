@@ -1,5 +1,7 @@
 package com.projet.altn72.entite;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Outil")
-public class OutilEntite{
+public class OutilEntite implements Serializable{
 
     @Id
     @Column(name = "titre", length = 150, nullable = false)

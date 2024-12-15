@@ -3,6 +3,7 @@ package com.projet.altn72.entite;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,5 +28,6 @@ public class FeedbackEntite implements Serializable{
     private String textFeedback;
 
     @Column(name = "dateFeedback")
+    @JsonProperty("dateFeedback")
     private LocalDate dateFeedback;
 }

@@ -3,6 +3,7 @@ package com.projet.altn72.entite;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.projet.altn72.modele.composite.Utilisateur;
 
 import jakarta.persistence.Column;
@@ -40,14 +41,9 @@ public class UtilisateurEntite implements Serializable {
     private String nom;
 
     @Column(name = "DOB")
+    @JsonProperty("DOB")
     private LocalDate DOB;
 
-    @Column(name = "isAdmin")
-    private boolean isAdmin;
-
-    @Column(name = "isStudent")
-    private boolean isStudent;
-
-    @Column(name = "isTeacher")
-    private boolean isTeacher;
+    @Column(name = "statut", length = 50)
+    private String statut;
 }
