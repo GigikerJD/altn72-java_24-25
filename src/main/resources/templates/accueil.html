@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Hub d'outils pour les enseignants : Page d'accueil</title>
+</head>
+<body>
+    <main class="container mt-5">
+        <!-- Barre de navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Hub d'outils</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/account/login}">Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/account/signup}">Inscription</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contenu principal -->
+        <div class="text-center mt-5">
+            <h1>Bienvenue sur le Hub d'outils pour les enseignants</h1>
+            <p class="lead mt-3">Simplifiez la gestion de vos cours et activités avec nos outils spécialement conçus pour les enseignants.</p>
+            <a href="signup.html" class="btn btn-primary btn-lg mt-4">Rejoignez-nous maintenant</a>
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-light text-center py-3 mt-5 border-top">
+        <p class="mb-0">&copy; 2024 Hub d'outils. Tous droits réservés.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
