@@ -6,6 +6,15 @@
     <title>Espace étudiant</title>
 </head>
 <body>
-    
+    <h1>Bienvenue, Étudiant !</h1>
+    <p>Vos informations :</p>
+    <ul>
+        <li>Email : <span th:text="${utilisateur.email}"></span></li>
+        <li>Pseudo : <span th:text="${utilisateur.pseudo}"></span></li>
+        <li>Prénom : <span th:text="${utilisateur.prenom}"></span></li>
+        <li>Nom : <span th:text="${utilisateur.nom}"></span></li>
+        <li>Date de naissance : <span th:text="${utilisateur.DOB}"></span></li>
+        <li>Statut : <span th:text="${utilisateur.statut}"></span></li>
+    </ul>
 </body>
 </html>

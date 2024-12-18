@@ -1,19 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <form method="post">
-        <div class="input-container">
-            <label for="email">Email :</label><input type="email" name="email" id="email"/>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6 col-sm-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="text-center mb-4">Connexion</h3>
+                        <form method="post" th:action="@{/account/login}">
+                            <!-- Email Field -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email :</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Entrez votre email" required>
+                            </div>
+                            <!-- Password Field -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Mot de passe :</label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Entrez votre mot de passe" required>
+                            </div>
+                            <!-- Submit Button -->
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Se connecter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <small>Vous n'avez pas de compte ? <a th:href="@{/account/signup}" class="text-decoration-none">Inscrivez-vous</a></small>
+                </div>
+            </div>
         </div>
-        <div class="input-container">
-            <label for="password">Mot de passe :</label><input type="password" name="password" id="password"/>
-        </div>
-        <button disabled="disabled" onclick="">Se connecter</button>
-    </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+ojr59ljnDGLGh7uwl0nJJw21u6e+" crossorigin="anonymous"></script>
 </body>
 </html>
