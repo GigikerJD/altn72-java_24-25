@@ -10,6 +10,6 @@ public class WelcomeControleur {
 
     @GetMapping("")
     public String PageDeBienvenue(){
-        return "accueil"; //Page d'accueil 'accueil.html'
+        return "accueil";
     }
 }
