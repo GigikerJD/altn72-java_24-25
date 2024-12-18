@@ -111,13 +111,13 @@ public class UtilisateurService {
         model.addAttribute("utilisateur", utilisateur);
         switch(utilisateur.getStatut()){
             case "STUDENT":
-                nextPage = "redirect:/userspace/" + utilisateur.getEmail();
+                nextPage = "redirect:/student/" + utilisateur.getEmail();
                 break;
             case "TEACHER":
-                nextPage = "redirect:/teach";
+                nextPage = "redirect:/teacher/" + utilisateur.getEmail();
                 break;
             case "ADMIN":
-                nextPage = "admin";
+                nextPage = "redirect:/admin/" + utilisateur.getEmail();
                 break; 
         }
         return nextPage;
