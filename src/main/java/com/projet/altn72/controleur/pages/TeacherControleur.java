@@ -11,7 +11,7 @@ import com.projet.altn72.entite.UtilisateurEntite;
 import com.projet.altn72.service.UtilisateurService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/teacher")
 public class TeacherControleur {
 
     @Autowired
@@ -21,7 +21,7 @@ public class TeacherControleur {
     public String TeacherPage(@PathVariable String email, Model model){
         UtilisateurEntite e = utilisateurService.getUtilisateurParEmail(email);
         model.addAttribute("utilisateur", e);
-        return "admin";
+        return "teacher";
     }
 
 }
