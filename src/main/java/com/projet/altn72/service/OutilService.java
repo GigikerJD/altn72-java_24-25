@@ -23,6 +23,11 @@ public class OutilService {
     }
 
     public OutilEntite getOutilParTitre(String titre){
-        return outilRepository.findById(titre).get();
+        return outilRepository
+            .findAll()
+            .stream()
+            .filter(o -> o.getTitre().equals(titre))
+            .findFirst()
+            .orElse(null);
     }
 }
