@@ -26,7 +26,7 @@ public class InscriptionControleur {
         return "signup"; 
     }
 
-    @PostMapping("/new_user")
+    @PostMapping("/signup")
     public ResponseEntity<Void> createNouvelUtilisateur(@RequestBody UtilisateurEntite utilisateur) {
         utilisateurService.creerNouvelUtilisateur(utilisateur);
         return ResponseEntity.status(HttpStatus.CREATED).build();
