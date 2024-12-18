@@ -9,10 +9,6 @@ public class Utilisateur implements Serializable {
 
     public Utilisateur() {}
 
-    public Utilisateur(String email){
-        this.email = email;
-    }
-
     public Utilisateur(String email, String pseudo) {
         this.email = email;
         this.pseudo = pseudo;
