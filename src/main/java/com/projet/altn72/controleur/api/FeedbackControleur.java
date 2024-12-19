@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/feedbacks")
-public class FeedbackControlleur {
+public class FeedbackControleur {
 
     @Autowired
     private FeedbackService feedbackService;

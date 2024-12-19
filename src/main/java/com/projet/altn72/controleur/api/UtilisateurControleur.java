@@ -32,7 +32,7 @@ public class UtilisateurControleur {
     public ResponseEntity<List<UtilisateurEntite>> getTouslesUtilisateurs() {
         List<UtilisateurEntite> users = utilisateurService.getUtilisateurs();
         return users.isEmpty() ?
-            ResponseEntity.status(HttpStatusCode.valueOf(404)).build() :
+            ResponseEntity.status(404).build() :
             ResponseEntity.status(200).body(users);  
     }
 
@@ -48,7 +48,7 @@ public class UtilisateurControleur {
     public ResponseEntity<UtilisateurEntite> getUtilisateurParPseudo(@PathVariable String pseudo){
         UtilisateurEntite e = utilisateurService.getUtilisateurParPseudo(pseudo);
         return e == null ?
-            ResponseEntity.notFound().build() :
+            ResponseEntity.notFound().build() : 
             ResponseEntity.ok(e);
     }
 
@@ -59,7 +59,7 @@ public class UtilisateurControleur {
         
         boolean hasChangePseudo = utilisateurService.changePseudo(oldPseudo, newPseudo);
         return hasChangePseudo ?
-            ResponseEntity.status(200).body(String.format("Votre profil au nom de %s a été modifié !", newPseudo)) :
+            ResponseEntity.ok(String.format("Votre profil au nom de %s a été modifié !", newPseudo)) :
             ResponseEntity.badRequest().body("Échec de la modification. Vérifiez vos informations !");
     }
 
@@ -68,15 +68,16 @@ public class UtilisateurControleur {
     public ResponseEntity<String> createNouvelUtilisateur(@RequestBody UtilisateurEntite user){
         boolean isCreated = utilisateurService.creerNouvelUtilisateur(user);
         return isCreated ? 
-            ResponseEntity.ok().body("Votre profil a été créé avec succès !") :
-            ResponseEntity.badRequest().body("Ce mail ou pseudo est déjà utilisé !");
+            ResponseEntity.ok("Votre profil a été créé avec succès !") :
+            ResponseEntity.badRequest().body("Vous n'avez pas respectez les conditions pour créer votre !");
     }
+    
 
     @DeleteMapping("/email/{email}")
-    public ResponseEntity<String> supprimerUtilisateur(@PathVariable String email){
+    public ResponseEntity<String> eleteUtilisateur(@PathVariable String email){
         boolean hasBeenDeleted = utilisateurService.supprimerUtilisateur(email);
         return hasBeenDeleted ?
-            ResponseEntity.status(HttpStatusCode.valueOf(200)).body("Votre profil a été supprimée !") :
+            ResponseEntity.ok("Votre profil a été supprimée !") :
             ResponseEntity.status(HttpStatusCode.valueOf(404)).body("Le profil de cet email est inexistant !");
     }
     
