@@ -18,7 +18,7 @@ public class OutilService {
         return outilRepository.findAll();
     }
 
-    public String getDetailledDescFrom(String titre){
+    public String getDetailledDescription(String titre){
         return outilRepository.findById(titre).map(OutilEntite::getDetailledDesc).orElse("Description détaillée non présente...");
     }
 

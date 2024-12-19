@@ -72,21 +72,41 @@ public class UtilisateurService {
         return true;
     }
 
-    public boolean creerNouvelUtilisateur(UtilisateurEntite newUser) {
+    public String creerNouvelUtilisateur(UtilisateurEntite newUser, Model model) {
         UtilisateurEntite e = getUtilisateurParEmail(newUser.getEmail());
+        String nextPage = "signup";
         boolean isAlreadyEnlisted = (e != null);
-        if(isAlreadyEnlisted)
-            return false;
-        else{
-            String hashPassword = passwordEncoder.encode(newUser.getMotDePasse());
-            String capitalizedFirstname = capitalize(newUser.getPrenom());
-            newUser.setPrenom(capitalizedFirstname);
-            newUser.setMotDePasse(hashPassword);
-            newUser.setNom(newUser.getNom().toUpperCase());
-            utilisateurRepository.save(newUser);
-            return true;
+        if(isAlreadyEnlisted){
+            model.addAttribute("erreur", "Un profil avec cet email existe déjà");
+            return nextPage;
         }
-    }  
+        else{
+            model.addAttribute("succès", "Votre compte a été créé avec succès");
+            String hashPassword = passwordEncoder.encode(newUser.getMotDePasse());
+            String firstnameToCapital = capitalize(newUser.getPrenom());
+            String lastnameToUpper = newUser.getNom().toUpperCase();
+            newUser.setMotDePasse(hashPassword);
+            newUser.setPrenom(firstnameToCapital);
+            newUser.setNom(lastnameToUpper);
+            utilisateurRepository.save(newUser);
+            nextPage = "redirect:/succes";
+            return nextPage;
+        }
+    }
+    
+    public boolean creerNouvelUtilisateur(UtilisateurEntite user){
+        UtilisateurEntite e = getUtilisateurParEmail(user.getEmail());
+        if(e != null) return false;
+        if(!List.of("STUDENT", "ADMIN", "TEACHER").contains(user.getStatut())) return false;
+        String hashPassword = passwordEncoder.encode(user.getMotDePasse());
+        String firstnameToCapital = capitalize(user.getPrenom());
+        String lastnameToUpper = user.getNom().toUpperCase();
+        user.setMotDePasse(hashPassword);
+        user.setPrenom(firstnameToCapital);
+        user.setNom(lastnameToUpper);
+        utilisateurRepository.save(user);
+        return true;
+    }
 
     public boolean supprimerUtilisateur(String email){
         UtilisateurEntite e = getUtilisateurParEmail(email);
@@ -95,7 +115,7 @@ public class UtilisateurService {
         return true;
     }
 
-    public String Login(Model model, String email, String password) {
+    public String seConnecter(Model model, String email, String password) {
         UtilisateurEntite utilisateur = getUtilisateurParEmail(email);
         String nextPage = "login";
         if(utilisateur == null){
