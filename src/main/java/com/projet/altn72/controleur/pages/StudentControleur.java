@@ -18,7 +18,7 @@ public class StudentControleur {
     private UtilisateurService utilisateurService;
 
     @GetMapping("/{email}")
-    public String StudentPage(@PathVariable String email ,Model model){
+    public String afficherPageEtudiant(@PathVariable String email ,Model model){
         UtilisateurEntite e = utilisateurService.getUtilisateurParEmail(email);
         model.addAttribute("utilisateur", e);
         return "etudiant";

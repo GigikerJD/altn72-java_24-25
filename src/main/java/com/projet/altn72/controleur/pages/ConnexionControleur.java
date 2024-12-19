@@ -20,13 +20,13 @@ public class ConnexionControleur {
     private UtilisateurService utilisateurService;
 
     @GetMapping("/login")
-    public String LoginPage() {
+    public String afficherFormulaire() {
         return "login";
     }
 
     @PostMapping("/login")
-    public String Login(Model model, @RequestParam String email, @RequestParam String password){
-        return utilisateurService.Login(model, email, password);
+    public String seConnecter(Model model, @RequestParam String email, @RequestParam String password){
+        return utilisateurService.seConnecter(model, email, password);
     }
     
 }

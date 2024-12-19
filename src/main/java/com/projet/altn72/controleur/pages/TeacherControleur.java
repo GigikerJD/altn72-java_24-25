@@ -18,7 +18,7 @@ public class TeacherControleur {
     private UtilisateurService utilisateurService;
 
     @GetMapping("/{email}")
-    public String TeacherPage(@PathVariable String email, Model model){
+    public String afficherPageEnseignant(@PathVariable String email, Model model){
         UtilisateurEntite e = utilisateurService.getUtilisateurParEmail(email);
         model.addAttribute("utilisateur", e);
         return "teacher";

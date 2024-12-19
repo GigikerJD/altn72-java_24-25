@@ -1,8 +1,6 @@
 package com.projet.altn72.controleur.pages;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +25,9 @@ public class InscriptionControleur {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<Void> createNouvelUtilisateur(@RequestBody UtilisateurEntite utilisateur) {
-        utilisateurService.creerNouvelUtilisateur(utilisateur);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public String createNouvelUtilisateur(@RequestBody UtilisateurEntite utilisateur, Model model) {
+        return utilisateurService.creerNouvelUtilisateur(utilisateur, model);
+    }
 }
 
-}
+

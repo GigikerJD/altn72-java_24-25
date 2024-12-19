@@ -18,7 +18,7 @@ public class AdminControleur {
     private UtilisateurService utilisateurService;
 
     @GetMapping("/{email}")
-    public String AdminPage(@PathVariable String email, Model model){
+    public String afficherPageAdmin(@PathVariable String email, Model model){
         UtilisateurEntite e = utilisateurService.getUtilisateurParEmail(email);
         model.addAttribute("utilisateur", e);
         return "admin";

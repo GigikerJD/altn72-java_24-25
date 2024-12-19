@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WelcomeControleur {
 
     @GetMapping("")
-    public String PageDeBienvenue(){
+    public String pageDeBienvenue(){
         return "accueil";
     }
 }
