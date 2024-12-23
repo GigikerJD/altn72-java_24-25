@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.projet.altn72.modele.composite.Consulte;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -24,12 +25,15 @@ import lombok.NoArgsConstructor;
 public class ConsulteEntite implements Serializable {
     
     @Id
+    @Column(name= "email", length = 150)
     private String email;
 
     @Id
+    @Column(name = "pseudo", length = 100)
     private String pseudo;
 
     @Id
+    @Column(name = "titre", length = 150)
     private String titre;
 
     @ManyToOne

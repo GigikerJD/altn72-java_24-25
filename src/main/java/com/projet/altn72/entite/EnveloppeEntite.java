@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.projet.altn72.modele.composite.Enveloppe;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -23,9 +24,11 @@ import lombok.NoArgsConstructor;
 public class EnveloppeEntite implements Serializable {
     
     @Id
+    @Column(name = "idFeedback", length = 100)
     private String idFeedback;
 
     @Id
+    @Column(name = "titre", length = 150)
     private String titre;
 
     @ManyToOne

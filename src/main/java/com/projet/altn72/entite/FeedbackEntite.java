@@ -24,7 +24,7 @@ public class FeedbackEntite implements Serializable{
     @Column(name = "idFeedback", length = 100)
     private String idFeedback;
 
-    @Column(name = "textFeedback", length = 50)
+    @Column(name = "textFeedback", length = 500)
     private String textFeedback;
 
     @Column(name = "dateFeedback")
