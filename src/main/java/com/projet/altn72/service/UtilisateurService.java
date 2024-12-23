@@ -74,14 +74,12 @@ public class UtilisateurService {
 
     public String creerNouvelUtilisateur(UtilisateurEntite newUser, Model model) {
         UtilisateurEntite e = getUtilisateurParEmail(newUser.getEmail());
-        String nextPage = "signup";
         boolean isAlreadyEnlisted = (e != null);
         if(isAlreadyEnlisted){
             model.addAttribute("erreur", "Un profil avec cet email existe déjà");
-            return nextPage;
+            return "signup";
         }
         else{
-            model.addAttribute("succès", "Votre compte a été créé avec succès");
             String hashPassword = passwordEncoder.encode(newUser.getMotDePasse());
             String firstnameToCapital = capitalize(newUser.getPrenom());
             String lastnameToUpper = newUser.getNom().toUpperCase();
@@ -89,8 +87,7 @@ public class UtilisateurService {
             newUser.setPrenom(firstnameToCapital);
             newUser.setNom(lastnameToUpper);
             utilisateurRepository.save(newUser);
-            nextPage = "redirect:/succes";
-            return nextPage;
+            return "redirect:/succes";
         }
     }
     
@@ -108,11 +105,9 @@ public class UtilisateurService {
         return true;
     }
 
-    public boolean supprimerUtilisateur(String email){
-        UtilisateurEntite e = getUtilisateurParEmail(email);
-        if(e == null) return false;
+    public void supprimerUtilisateur(String email){
+        var e = getUtilisateurParEmail(email);
         utilisateurRepository.delete(e);
-        return true;
     }
 
     public String seConnecter(Model model, String email, String password) {
