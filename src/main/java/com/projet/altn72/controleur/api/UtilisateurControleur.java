@@ -3,8 +3,8 @@ package com.projet.altn72.controleur.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projet.altn72.entite.UtilisateurEntite;
@@ -29,15 +29,15 @@ public class UtilisateurControleur {
     private UtilisateurService utilisateurService;
 
     @GetMapping("")
-    public ResponseEntity<List<UtilisateurEntite>> getTouslesUtilisateurs() {
+    public ResponseEntity<?> getTousLesUtilisateurs() {
         List<UtilisateurEntite> users = utilisateurService.getUtilisateurs();
         return users.isEmpty() ?
-            ResponseEntity.status(404).build() :
+            ResponseEntity.status(204).body("Votre liste d'utilisateurs est vide") :
             ResponseEntity.status(200).body(users);  
     }
 
-    @GetMapping("email/{email}")
-    public ResponseEntity<UtilisateurEntite>  getUtilisateurParEmail(@PathVariable String email){
+    @GetMapping("user/{email}")
+    public ResponseEntity<?>  getUtilisateurParEmail(@PathVariable String email){
         UtilisateurEntite e = utilisateurService.getUtilisateurParEmail(email);
         return e == null ?
             ResponseEntity.notFound().build() :
@@ -53,7 +53,7 @@ public class UtilisateurControleur {
     }
 
     @PutMapping("/settings/{oldPseudo}")
-    public ResponseEntity<String> modifyUtilisateurParPseudo(@PathVariable String oldPseudo, @RequestParam String newPseudo){
+    public ResponseEntity<?> modifyUtilisateurParPseudo(@PathVariable String oldPseudo, @RequestParam String newPseudo){
         if (oldPseudo.equals(newPseudo))
             return ResponseEntity.badRequest().body("Les pseudos sont identiques");
         
@@ -65,20 +65,24 @@ public class UtilisateurControleur {
 
     
     @PostMapping("/candidate")
-    public ResponseEntity<String> createNouvelUtilisateur(@RequestBody UtilisateurEntite user){
-        boolean isCreated = utilisateurService.creerNouvelUtilisateur(user);
-        return isCreated ? 
-            ResponseEntity.ok("Votre profil a été créé avec succès !") :
-            ResponseEntity.badRequest().body("Vous n'avez pas respectez les conditions pour créer votre !");
+    public ResponseEntity<?> createNouvelUtilisateur(@RequestBody UtilisateurEntite user){
+        var isAlreadyEnrolledWithEmail = utilisateurService.getUtilisateurParEmail(user.getEmail());
+        if(isAlreadyEnrolledWithEmail != null) return ResponseEntity.badRequest().body("Un utilisateur avec cet email existe déjà !");
+        var isAlreadyEnrolledWithPseudo = utilisateurService.getUtilisateurParPseudo(user.getPseudo());
+        if(isAlreadyEnrolledWithPseudo != null) return ResponseEntity.badRequest().body("Un utilisateur avec ce pseudo existe déjà !");
+        utilisateurService.creerNouvelUtilisateur(user);        
+        return ResponseEntity.ok("Votre profil a été créé avec succès !");
     }
     
 
-    @DeleteMapping("/email/{email}")
-    public ResponseEntity<String> eleteUtilisateur(@PathVariable String email){
-        boolean hasBeenDeleted = utilisateurService.supprimerUtilisateur(email);
-        return hasBeenDeleted ?
-            ResponseEntity.ok("Votre profil a été supprimée !") :
-            ResponseEntity.status(HttpStatusCode.valueOf(404)).body("Le profil de cet email est inexistant !");
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUtilisateur(@RequestParam @Nullable String email){
+        var user = utilisateurService.getUtilisateurParEmail(email);
+        if (user != null) {
+            utilisateurService.supprimerUtilisateur(email);
+            return ResponseEntity.ok("Votre profil a été supprimé !");
+        } else 
+            return ResponseEntity.badRequest().body("Cet utilisateur n'existait pas !");
     }
     
 }
