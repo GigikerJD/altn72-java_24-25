@@ -15,7 +15,7 @@ CREATE TABLE Utilisateur(
 
 CREATE TABLE Feedback(
    idFeedback VARCHAR(100),
-   textFeedback VARCHAR(50),
+   textFeedback VARCHAR(500),
    dateFeedback DATETIME,
    PRIMARY KEY(idFeedback)
 );
