@@ -8,6 +8,7 @@ CREATE TABLE Utilisateur(
    motDePasse VARCHAR(100),
    prenom VARCHAR(100),
    nom VARCHAR(100),
+   genre VARCHAR(10),
    statut VARCHAR(50)
    DOB DATE,
    PRIMARY KEY(email, pseudo)

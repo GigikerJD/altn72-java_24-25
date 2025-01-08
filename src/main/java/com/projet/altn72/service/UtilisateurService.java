@@ -65,7 +65,8 @@ public class UtilisateurService {
             utilisateur.getPrenom(), 
             utilisateur.getNom(), 
             utilisateur.getDOB(), 
-            utilisateur.getStatut()
+            utilisateur.getStatut(),
+            utilisateur.getGenre()
         );
         utilisateurRepository.delete(utilisateur);
         utilisateurRepository.save(newUtilisateur);
