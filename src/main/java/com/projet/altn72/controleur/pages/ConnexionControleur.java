@@ -25,8 +25,13 @@ public class ConnexionControleur {
     }
 
     @PostMapping("/login")
-    public String seConnecter(Model model, @RequestParam String email, @RequestParam String password){
-        return utilisateurService.seConnecter(model, email, password);
+    public String seConnecter(Model model, @RequestParam String pseudo, @RequestParam String password){
+        return utilisateurService.seConnecter(model, pseudo, password);
+    }
+
+    @PostMapping("/logout")
+    public String seDeconnecter(){
+        return utilisateurService.seDeconnecter();
     }
     
 }
