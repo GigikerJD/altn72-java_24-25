@@ -20,7 +20,15 @@
             <li class="list-group-item"><strong>Accès :</strong> <span th:text="${outil.acces}"></span></li>
         </ul>
 
-        <a th:href="@{/student/{pseudo}(pseudo=${utilisateur.pseudo})}" class="btn btn-secondary mt-3">Retour à la liste</a>
+        <div th:if="${utilisateur.statut == 'STUDENT'}">
+            <a th:href="@{/student/{pseudo}(pseudo=${utilisateur.pseudo})}" class="btn btn-secondary mt-3">Retour à la liste</a>
+        </div>
+        <div th:if="${utilisateur.statut == 'TEACHER'}">
+            <a th:href="@{/teacher/{pseudo}(pseudo=${utilisateur.pseudo})}" class="btn btn-secondary mt-3">Retour à la liste</a>
+        </div>
+        <div th:if="${utilisateur.statut == 'ADMIN'}">
+            <a th:href="@{/admin/{pseudo}(pseudo=${utilisateur.pseudo})}" class="btn btn-secondary mt-3">Retour à la liste</a>
+        </div>
     </div>
 </body>
 </html>

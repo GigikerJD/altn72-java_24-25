@@ -30,6 +30,7 @@
                     <th>Description</th>
                     <th>Lien</th>
                     <th>Détails</th>
+                    <th>Feedbacks</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,9 @@
                     <td><a th:href="${outil.lienURL}" th:text="${outil.lienURL}"></a></td>
                     <td>
                         <a th:href="@{/student/{pseudo}/outil/{titre}(pseudo=${utilisateur.pseudo}, titre=${outil.titre})}" class="btn btn-primary btn-sm">Voir Détails</a>                        <!-- <a href="details.html" th:href="@{/order/{orderId}/details(orderId=${o.id})}">view</a> -->
+                    </td>
+                    <td>
+                        <a th:href="@{/student/{email}/feedbacks}">Voir feedbacks</a>
                     </td>
                 </tr>
             </tbody>
