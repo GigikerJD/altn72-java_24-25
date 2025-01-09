@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Espace étudiant</title>
+    <title>Espace Étudiant</title>
 </head>
 <body class="bg-body-secondary">
     <main class="container mt-5">
         <!-- Barre de navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light rounded shadow-sm">
             <div class="container-fluid">
-                
+                <span class="navbar-text me-auto">
+                    Bonjour <strong th:text="${utilisateur.prenom}"></strong> <strong th:text="${utilisateur.nom}"></strong> !
+                </span>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        
                         <li class="nav-item">
                             <a class="btn btn-primary nav-link active text-white" th:href="@{/account/login}">Déconnexion</a>
                         </li>
@@ -26,33 +27,9 @@
             </div>
         </nav>
 
+
         <!-- Contenu principal -->
-        <div class="card mt-5 shadow-sm">
-            <div class="card-body">
-                <h1 class="card-title text-center">Bienvenue, Étudiant !</h1>
-                <p class="text-center lead mt-3">Voici vos informations :</p>
-                <ul class="list-group list-group-flush mt-4">
-                    <li class="list-group-item">
-                        <strong>Email : </strong><span th:text="${utilisateur.email}"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Pseudo : </strong><span th:text="${utilisateur.pseudo}"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Prénom : </strong><span th:text="${utilisateur.prenom}"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Nom : </strong><span th:text="${utilisateur.nom}"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Date de naissance : </strong><span th:text="${utilisateur.DOB}"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Statut : </strong><span th:text="${utilisateur.statut}"></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        
     </main>
 
     <!-- Pied de page -->
