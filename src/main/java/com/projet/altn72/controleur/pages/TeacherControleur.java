@@ -21,7 +21,7 @@ public class TeacherControleur {
     public String afficherPageEnseignant(@PathVariable String email, Model model){
         UtilisateurEntite e = utilisateurService.getUtilisateurParEmail(email);
         model.addAttribute("utilisateur", e);
-        return "teacher";
+        return "enseignant";
     }
 
 }
