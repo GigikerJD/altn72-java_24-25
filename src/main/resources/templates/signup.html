@@ -29,17 +29,18 @@
                 <!-- Prénom -->
                 <div class="col-md-6">
                     <label for="prenom" class="form-label">Prénom</label>
-                    <input type="text" th:field="*{prenom}" name="prenom" id="prenom" class="form-control">
+                    <input type="text" th:field="*{prenom}" name="prenom" id="prenom" class="form-control" required>
                 </div>
                 <!-- Nom -->
                 <div class="col-md-6">
                     <label for="nom" class="form-label">Nom</label>
-                    <input type="text" th:field="*{nom}" name="nom" id="nom" class="form-control">
+                    <input type="text" th:field="*{nom}" name="nom" id="nom" class="form-control" required>
                 </div>
                 <!-- Genre -->
                 <div class="col-md-6">
                     <label for="genre" class="form-label">Genre</label>
-                    <select name="genre" id="genre" th:field="*{genre}" class="form-select">
+                    <select name="genre" id="genre" th:field="*{genre}" class="form-select" required>
+                        <option value="" disabled selected>Choisissez...</option>
                         <option value="MALE">Homme</option>
                         <option value="FEMALE">Femme</option>
                     </select>
@@ -47,17 +48,18 @@
                 <!-- Date de naissance -->
                 <div class="col-md-6">
                     <label for="DOB" class="form-label">Date de naissance</label>
-                    <input type="date" th:field="*{DOB}" name="DOB" id="DOB" class="form-control">
+                    <input type="date" th:field="*{DOB}" name="DOB" id="DOB" class="form-control" required>
                 </div>
                 <!-- Mot de passe -->
                 <div class="col-md-6">
                     <label for="motDePasse" class="form-label">Mot de Passe</label>
-                    <input type="password" th:field="*{motDePasse}" name="motDePasse" id="motDePasse" class="form-control">
+                    <input type="password" th:field="*{motDePasse}" name="motDePasse" id="motDePasse" class="form-control" required>
                 </div>
                 <!-- Statut -->
                 <div class="col-md-6">
                     <label for="status" class="form-label">Statut</label>
-                    <select name="status" th:field="*{statut}" id="status" class="form-select">
+                    <select name="status" th:field="*{statut}" id="status" class="form-select" required>
+                        <option value="" disabled selected>Choisissez...</option>
                         <option value="STUDENT">Étudiant(e)</option>
                         <option value="TEACHER">Professeur(e)</option>
                         <option value="ADMIN">Administrateur(trice)</option>
@@ -66,7 +68,7 @@
             </div>
             <!-- Bouton -->
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary" disabled="disabled">S'inscrire</button>
+                <button type="submit" class="btn btn-primary" disabled>S'inscrire</button>
             </div>
         </form>
     </div>
@@ -94,15 +96,14 @@
                 }
             };
         
-            // Add event listeners to all required inputs
+            // Verif que tout les inputs sont remplis
             inputs.forEach(input => {
                 input.addEventListener("input", validateForm);
             });
         
-            // Initial validation in case the form is already filled
+            
             validateForm();
         });
-
     </script>
 </body>
 </html>
