@@ -48,4 +48,8 @@ public class FeedbackService {
         return feedbackRepository.existsById(idFeedback);
     }
 
+    public String creerNouveauFeedback(FeedbackEntite feedbackUtilisateur) {
+        return "feedbacks";
+    }
+
 }

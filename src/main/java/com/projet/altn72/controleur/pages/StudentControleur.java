@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.projet.altn72.entite.FeedbackEntite;
 import com.projet.altn72.entite.OutilEntite;
 import com.projet.altn72.entite.UtilisateurEntite;
+import com.projet.altn72.service.FeedbackService;
 import com.projet.altn72.service.OutilService;
 import com.projet.altn72.service.UtilisateurService;
 
@@ -25,6 +29,9 @@ public class StudentControleur {
 
     @Autowired 
     private OutilService outilService;
+
+    @Autowired 
+    private FeedbackService feedbackService;
 
     @GetMapping("/{pseudo}")
     public String afficherPageEtudiant(@PathVariable String pseudo ,Model model){
@@ -42,5 +49,20 @@ public class StudentControleur {
         model.addAttribute("utilisateur", utilisateur);
         model.addAttribute("outil", outil);
         return "outil";
+    }
+
+    @GetMapping("/{pseudo}/feedbacks")
+    public String afficherFeedbacks(@PathVariable String pseudo, Model model){
+        UtilisateurEntite e = utilisateurService.getUtilisateurParPseudo(pseudo);
+        List<FeedbackEntite> feedbacks = feedbackService.getFeedbacksParUtilisateur(e);
+        model.addAttribute("utilisateur", e);
+        model.addAttribute("feedbacksUtilisateur", feedbacks);
+        model.addAttribute("newFeedback", new FeedbackEntite());
+        return "feedbacks";
+    }
+
+    @PostMapping("/{pseudo}/createFeedback")
+    public String creerNouveauFeedback(@ModelAttribute FeedbackEntite feedbackUtilisateur){
+        return feedbackService.creerNouveauFeedback(feedbackUtilisateur);
     }
 }
