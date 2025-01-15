@@ -32,5 +32,14 @@ public class TeacherControleur {
         model.addAttribute("outils", outils);
         return "enseignant";
     }
+    
+    @GetMapping("/{pseudo}/outil/{titre}")
+    public String afficherDetailsOutil(@PathVariable String pseudo, @PathVariable String titre, Model model){
+        UtilisateurEntite utilisateur = utilisateurService.getUtilisateurParPseudo(pseudo);
+        OutilEntite outil = outilService.getOutilParTitre(titre);
+        model.addAttribute("utilisateur", utilisateur);
+        model.addAttribute("outil", outil);
+        return "outil";
+    }
 
 }
