@@ -111,8 +111,8 @@ public class UtilisateurService {
         utilisateurRepository.delete(e);
     }
 
-    public String seConnecter(Model model, String email, String password) {
-        UtilisateurEntite utilisateur = getUtilisateurParEmail(email);
+    public String seConnecter(Model model, String pseudo, String password) {
+        UtilisateurEntite utilisateur = getUtilisateurParPseudo(pseudo);
         String nextPage = "login";
         if(utilisateur == null){
             model.addAttribute("erreur", "Votre email est incorrecte !");
@@ -123,22 +123,19 @@ public class UtilisateurService {
             model.addAttribute("erreur", "Votre mot de passe est incorrecte !");
             return nextPage;
         }
-        model.addAttribute("succes", "Vous êtes connecté !");
-        model.addAttribute("utilisateur", utilisateur);
         switch(utilisateur.getStatut()){
             case "STUDENT":
-                nextPage = "redirect:/student/" + utilisateur.getEmail();
+                nextPage = "redirect:/student/" + utilisateur.getPseudo();
                 break;
             case "TEACHER":
-                nextPage = "redirect:/teacher/" + utilisateur.getEmail();
+                nextPage = "redirect:/teacher/" + utilisateur.getPseudo();
                 break;
             case "ADMIN":
-                nextPage = "redirect:/admin/" + utilisateur.getEmail();
+                nextPage = "redirect:/admin/" + utilisateur.getPseudo();
                 break; 
         }
         return nextPage;
     }
-
     public List<UtilisateurEntite> getEnseignants(){
         return utilisateurRepository
             .findAll()
@@ -146,7 +143,6 @@ public class UtilisateurService {
             .filter(u -> u.getStatut().equals("TEACHER"))
             .toList();
     }
-
     public List<UtilisateurEntite> getEtudiants(){
         return utilisateurRepository
             .findAll()
@@ -162,9 +158,11 @@ public class UtilisateurService {
             .filter(u -> u.getStatut().equals("ADMIN"))
             .toList();
     }
-
-
     private String capitalize(String name){
         return name.toUpperCase().charAt(0) + name.toLowerCase().substring(1);
+    }
+
+    public String seDeconnecter() {
+        return "redirect:/";
     }
 }

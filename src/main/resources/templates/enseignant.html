@@ -1,42 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Espace Enseignant</title>
-</head>
-<body class="bg-body-secondary">
-    <main class="container mt-5">
-        <!-- Barre de navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded shadow-sm">
-            <div class="container-fluid">
-                <span class="navbar-text me-auto">
-                    Bonjour <strong th:text="${utilisateur.prenom}"></strong> <strong th:text="${utilisateur.nom}"></strong> !
-                </span>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="btn btn-primary nav-link active text-white" th:href="@{/account/login}">Déconnexion</a>
-                        </li>
-                    </ul>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title>Espace enseignant</title>
+    </head>
+    <body>
+        <div class="container-fluid mt-3">
+            <!-- Alignement du texte et du bouton dans une ligne -->
+            <div class="d-flex justify-content-end align-items-center">
+                <!-- Message de bienvenue -->
+                <div>
+                    <span th:text="'Bonjour ' + (${utilisateur.genre == 'MALE' ? 'M.' : 'Mme'}) + ' ' + ${utilisateur.prenom} + ' ' + ${utilisateur.nom}"></span>
                 </div>
+                <!-- Bouton de déconnexion -->
+                <form th:action="@{/account/logout}" method="post" class="ms-3">
+                    <button type="submit" class="btn btn-danger btn-sm">Deconnectez-vous</button>
+                </form>
             </div>
-        </nav>
-
-
-        <!-- Contenu principal -->
-        
-    </main>
-
-    <!-- Pied de page -->
-    <footer class="bg-light text-center py-3 mt-5 border-top">
-        <p class="mb-0">&copy; 2024 Hub d'outils. Tous droits réservés.</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        </div>
+    
+        <div class="container mt-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Domaine</th>
+                        <th>Description</th>
+                        <th>Lien</th>
+                        <th>Détails</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="outil : ${outils}">
+                        <td th:text="${outil.titre}"></td>
+                        <td th:text="${outil.domaine}"></td>
+                        <td th:text="${outil.simpleDesc}"></td>
+                        <td><a th:href="${outil.lienURL}" th:text="${outil.lienURL}"></a></td>
+                        <td>
+                            <a th:href="@{/student/{pseudo}/outil/{titre}(pseudo=${utilisateur.pseudo}, titre=${outil.titre})}" class="btn btn-primary btn-sm">Voir Détails</a>                        <!-- <a href="details.html" th:href="@{/order/{orderId}/details(orderId=${o.id})}">view</a> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <!-- 
+        <p class="mt-4">Vos informations :</p>
+        <ul>
+            <li>Email : <span th:text="${utilisateur.email}"></span></li>
+            <li>Pseudo : <span th:text="${utilisateur.pseudo}"></span></li>
+            <li>Prénom : <span th:text="${utilisateur.prenom}"></span></li>
+            <li>Nom : <span th:text="${utilisateur.nom}"></span></li>
+            <li>Date de naissance : <span th:text="${utilisateur.DOB}"></span></li>
+            <li>Statut : <span th:text="${utilisateur.statut}"></span></li>
+            <li>Genre : <span th:text="${utilisateur.genre}"></span></li>
+        </ul>
+        -->
+    
+    </body>
+    </html>
