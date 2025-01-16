@@ -1,6 +1,7 @@
 package com.projet.altn72.controleur.pages;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,11 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.projet.altn72.entite.EnveloppeEntite;
 import com.projet.altn72.entite.FeedbackEntite;
 import com.projet.altn72.entite.OutilEntite;
 import com.projet.altn72.entite.UtilisateurEntite;
+import com.projet.altn72.service.EnvellopeService;
 import com.projet.altn72.service.FeedbackService;
 import com.projet.altn72.service.OutilService;
 import com.projet.altn72.service.UtilisateurService;
@@ -32,6 +37,9 @@ public class StudentControleur {
 
     @Autowired 
     private FeedbackService feedbackService;
+
+    @Autowired
+    private EnvellopeService envellopeService;
 
     @GetMapping("/{pseudo}")
     public String afficherPageEtudiant(@PathVariable String pseudo ,Model model){
@@ -55,6 +63,10 @@ public class StudentControleur {
     public String afficherFeedbacks(@PathVariable String pseudo, Model model){
         UtilisateurEntite e = utilisateurService.getUtilisateurParPseudo(pseudo);
         List<FeedbackEntite> feedbacks = feedbackService.getFeedbacksParUtilisateur(e);
+        List<OutilEntite> outils = outilService.getOutils();
+        
+        model.addAttribute("enveloppeService", envellopeService);
+        model.addAttribute("outils", outils);
         model.addAttribute("utilisateur", e);
         model.addAttribute("feedbacksUtilisateur", feedbacks);
         model.addAttribute("newFeedback", new FeedbackEntite());
@@ -62,7 +74,12 @@ public class StudentControleur {
     }
 
     @PostMapping("/{pseudo}/createFeedback")
-    public String creerNouveauFeedback(@ModelAttribute FeedbackEntite feedbackUtilisateur){
-        return feedbackService.creerNouveauFeedback(feedbackUtilisateur);
+    public String creerNouveauFeedback(@PathVariable String pseudo, @ModelAttribute FeedbackEntite feedbackUtilisateur, @RequestParam String outilRevue, Model model){
+        return feedbackService.creerNouveauFeedback(pseudo, feedbackUtilisateur, outilRevue, model);
+    }
+
+    @PutMapping("/{pseudo}/modifyFeedback/{idFeedback}")
+    public String modifierFeedback(@PathVariable String pseudo, @PathVariable String idFeedback, @ModelAttribute FeedbackEntite alteredFeedback){
+        return feedbackService.modifierFeedback(pseudo, idFeedback, alteredFeedback);
     }
 }

@@ -43,7 +43,7 @@
                         <a th:href="@{/student/{pseudo}/outil/{titre}(pseudo=${utilisateur.pseudo}, titre=${outil.titre})}" class="btn btn-primary btn-sm">Voir Détails</a>                        <!-- <a href="details.html" th:href="@{/order/{orderId}/details(orderId=${o.id})}">view</a> -->
                     </td>
                     <td>
-                        <a th:href="@{/student/{email}/feedbacks}">Voir feedbacks</a>
+                        <a th:href="@{/student/{pseudo}/feedbacks(pseudo=${utilisateur.pseudo})}" class="btn btn-info btn-sm opacity-75">Voir feedbacks</a>
                     </td>
                 </tr>
             </tbody>

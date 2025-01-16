@@ -50,4 +50,7 @@ public class UtilisateurEntite implements Serializable {
     @Column(name = "genre", length = 10)
     private String genre;
 
+    @Column(name = "nombreFeedbacks")
+    private int nombreFeedbacks;
+
 }

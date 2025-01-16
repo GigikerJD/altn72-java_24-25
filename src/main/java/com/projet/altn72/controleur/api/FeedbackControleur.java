@@ -11,8 +11,6 @@ import com.projet.altn72.entite.FeedbackEntite;
 import com.projet.altn72.service.FeedbackService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -39,6 +37,7 @@ public class FeedbackControleur {
             ResponseEntity.ok(feedback);
     }
 
+    /*
     @PostMapping("/addfeedback")
     public ResponseEntity<?> addNewFeedback(@RequestBody FeedbackEntite feedback){
         var isRegistered = feedbackService.estFeedbackExistant(feedback.getIdFeedback());
@@ -49,5 +48,6 @@ public class FeedbackControleur {
             return ResponseEntity.ok().body("Votre feedback a été ajouté avec succès");
         }
     }
+    */
     
 }

@@ -1,5 +1,6 @@
 package com.projet.altn72.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,12 @@ public class UtilisateurService {
     private UtilisateurRepository utilisateurRepository;
 
     private final PasswordEncoder passwordEncoder;
+
+    private static final HashMap<String, Integer> nbreFeedbacks = new HashMap<>(){{
+        put("STUDEN", 25);
+        put("TEACHER", 20);
+        put("ADMIN", 30);
+    }};
 
     public UtilisateurService(PasswordEncoder passwordEncoder){
         this.passwordEncoder = passwordEncoder;
@@ -66,7 +73,8 @@ public class UtilisateurService {
             utilisateur.getNom(), 
             utilisateur.getDOB(), 
             utilisateur.getStatut(),
-            utilisateur.getGenre()
+            utilisateur.getGenre(),
+            nbreFeedbacks.get(utilisateur.getStatut())
         );
         utilisateurRepository.delete(utilisateur);
         utilisateurRepository.save(newUtilisateur);

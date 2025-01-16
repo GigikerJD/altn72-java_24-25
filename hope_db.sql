@@ -11,6 +11,7 @@ CREATE TABLE Utilisateur(
    genre VARCHAR(10),
    statut VARCHAR(50)
    DOB DATE,
+   nombreFeedbacks INT,
    PRIMARY KEY(email, pseudo)
 );
 
@@ -18,6 +19,7 @@ CREATE TABLE Feedback(
    idFeedback VARCHAR(100),
    textFeedback VARCHAR(500),
    dateFeedback DATETIME,
+   pseudoUser VARCHAR(100),
    PRIMARY KEY(idFeedback)
 );
 

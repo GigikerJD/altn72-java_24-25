@@ -30,4 +30,7 @@ public class FeedbackEntite implements Serializable{
     @Column(name = "dateFeedback")
     @JsonProperty("dateFeedback")
     private LocalDate dateFeedback;
+
+    @Column(name = "pseudoUser", length = 100)
+    private String pseudoUser;
 }
