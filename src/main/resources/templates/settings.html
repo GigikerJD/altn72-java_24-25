@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Paramètres</title>
+</head>
+<body class="bg-dark text-white">
+
+    <div class="container mt-2 mb-2 d-flex justify-content-end align-items-center">
+        <a th:href="@{/{statut}/{pseudo}(pseudo=${utilisateur.pseudo}, statut=${utilisateur.statut.toLowerCase()})}" class="btn btn-primary d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-square-fill me-2" viewBox="0 0 16 16">
+                <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1"/>
+            </svg>
+            Revenir à l'accueil
+        </a>
+    </div>
+    
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Paramètres de votre compte</h1>
+        <form th:action="@{/student/{pseudo}/settings(pseudo=${utilisateur.pseudo})}" method="post" class="needs-validation" novalidate>
+            <input type="hidden" name="_method" value="put">
+            <div class="mb-3">
+                <label for="email" class="form-label">Adresse Email</label>
+                <input type="email" class="form-control" id="email" name="email" th:value="${utilisateur.email}" required>
+            </div>
+            <div class="mb-3">
+                <label for="pseudo" class="form-label">Pseudo</label>
+                <input type="text" class="form-control" id="pseudo" name="pseudo" th:value="${utilisateur.pseudo}" required>
+            </div>
+            <div class="mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" th:value="${utilisateur.prenom}" required>
+            </div>
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" th:value="${utilisateur.nom}" required>
+            </div>
+            <div class="mb-3">
+                <label for="motDePasse" class="form-label">Nouveau mot de passe</label>
+                <input type="password" class="form-control" id="motDePasse" name="motDePasse" placeholder="Laissez vide pour ne pas changer">
+            </div>
+            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        </form>
+
+        <hr class="my-4">
+
+        <form th:action="@{/student/{pseudo}/settings(pseudo=${utilisateur.pseudo})}" method="post" 
+              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+        </form>
+    </div>
+
+    <script>
+        // Bootstrap form validation
+        (() => {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+</body>
+</html>
