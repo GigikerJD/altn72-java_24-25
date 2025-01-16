@@ -2,11 +2,15 @@ package com.projet.altn72.controleur.pages;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.projet.altn72.entite.OutilEntite;
@@ -40,6 +44,28 @@ public class TeacherControleur {
         model.addAttribute("utilisateur", utilisateur);
         model.addAttribute("outil", outil);
         return "outil";
+    }
+
+    @GetMapping("/{pseudo}/settings")
+    public String getMethodName(@PathVariable String pseudo, Model model) {
+        UtilisateurEntite e = utilisateurService.getUtilisateurParPseudo(pseudo);
+        model.addAttribute("utilisateur", e);
+        model.addAttribute("utilisateurAModifie", new UtilisateurEntite());
+        return "settings";
+    }
+
+    @PutMapping("{pseudo}/settings")
+    public String modifierInfosUtilisateur(@PathVariable String pseudo, @ModelAttribute UtilisateurEntite utilisateurAModifie) {
+        UtilisateurEntite e = utilisateurService.getUtilisateurParPseudo(pseudo);
+        BeanUtils.copyProperties(e, utilisateurAModifie);
+        return "redirect:/" + utilisateurAModifie.getStatut().toLowerCase() + "/" + utilisateurAModifie.getPseudo();
+    }
+
+    @DeleteMapping("{pseudo}/settings")
+    public String supprimerCompte(@PathVariable String pseudo){
+        UtilisateurEntite e = utilisateurService.getUtilisateurParPseudo(pseudo);
+        utilisateurService.supprimerUtilisateur(e.getEmail());
+        return "redirect:/";
     }
 
 }

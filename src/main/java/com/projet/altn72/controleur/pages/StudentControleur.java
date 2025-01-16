@@ -1,9 +1,11 @@
 package com.projet.altn72.controleur.pages;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import com.projet.altn72.service.EnvellopeService;
 import com.projet.altn72.service.FeedbackService;
 import com.projet.altn72.service.OutilService;
 import com.projet.altn72.service.UtilisateurService;
+
 
 
 
@@ -79,4 +82,27 @@ public class StudentControleur {
     public String modifierFeedback(@PathVariable String pseudo, @PathVariable String idFeedback, @ModelAttribute FeedbackEntite alteredFeedback){
         return feedbackService.modifierFeedback(pseudo, idFeedback, alteredFeedback);
     }
+
+    @GetMapping("/{pseudo}/settings")
+    public String getMethodName(@PathVariable String pseudo, Model model) {
+        UtilisateurEntite e = utilisateurService.getUtilisateurParPseudo(pseudo);
+        model.addAttribute("utilisateur", e);
+        model.addAttribute("utilisateurAModifie", new UtilisateurEntite());
+        return "settings";
+    }
+
+    @PutMapping("{pseudo}/settings")
+    public String modifierInfosUtilisateur(@PathVariable String pseudo, @ModelAttribute UtilisateurEntite utilisateurAModifie) {
+        UtilisateurEntite e = utilisateurService.getUtilisateurParPseudo(pseudo);
+        utilisateurService.mettreAJourUtilisateur(e, utilisateurAModifie);
+        return "redirect:/" + utilisateurAModifie.getStatut().toLowerCase() + "/" + utilisateurAModifie.getPseudo();
+    }
+
+    @DeleteMapping("{pseudo}/settings")
+    public String supprimerCompte(@PathVariable String pseudo){
+        UtilisateurEntite e = utilisateurService.getUtilisateurParPseudo(pseudo);
+        utilisateurService.supprimerUtilisateur(e.getEmail());
+        return "redirect:/";
+    }
+    
 }
